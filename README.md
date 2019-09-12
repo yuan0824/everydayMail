@@ -138,7 +138,7 @@ mailto=15234076721@163.com
 ```
 
 ## Demo
-执行Test方法可以手动发一封邮件
+执行send方法可以手动发一封邮件
 - MailTest
 ```
 @RunWith(SpringRunner.class)
