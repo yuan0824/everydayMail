@@ -4,7 +4,7 @@
 ## 预览
 包括三部分，自定义内容，天气，每日一句。
 效果如下
-![](https://github.com/yuan0824/img/blob/master/email-1.jpg)![](https://github.com/yuan0824/img/blob/master/email-2.jpg)
+![](https://github.com/yuan0824/img/blob/master/email-1.png)![](https://github.com/yuan0824/img/blob/master/email-2.png)
 
 ### 自定义内容
 FreeMarker模板引擎
