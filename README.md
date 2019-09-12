@@ -137,6 +137,23 @@ spring.mail.password=xxxx
 mailto=15234076721@163.com
 ```
 
+## Demo
+执行Test方法可以手动发一封邮件
+- MailTest
+```
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class MailTest {
+    @Autowired
+    private SendEmail sendEmail;
+
+    @Test
+    public void send() throws MessagingException, IOException, TemplateException, ParseException {
+        sendEmail.send();
+    }
+}
+```
+
 ## 欢迎
 欢迎阅读和review代码
 
