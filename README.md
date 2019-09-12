@@ -127,15 +127,13 @@ city=泸州
 
 ### 邮箱
 - .properties
-使用SMTP协议发送，发件邮箱
 ```
+# 使用SMTP协议发送，发件地址
 spring.mail.host=smtp.163.com
 spring.mail.username=15234076721@163.com
 spring.mail.password=xxxx
-```
 
-收件邮箱
-```
+# 收件邮箱
 mailto=15234076721@163.com
 ```
 
