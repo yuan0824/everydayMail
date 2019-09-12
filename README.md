@@ -92,4 +92,50 @@ JSoup爬虫爬取每日一句话和一张图
     }
 ```
 
-配置
+## 配置
+一般需要配置的文件
+
+### 定时任务
+- ScheduledTasks
+```java
+@Slf4j
+@Component
+public class ScheduledTasks {
+    private final SendEmail sendEmail;
+
+    @Autowired
+    public ScheduledTasks(SendEmail sendEmail) {
+        this.sendEmail = sendEmail;
+    }
+
+    @Scheduled(cron = "0 0 8 * * ?")
+    public void reportCurrentTime() throws TemplateException, IOException, MessagingException, ParseException {
+        log.info("start send");
+        sendEmail.send();
+        log.info("end send");
+    }
+}
+```
+使用cron表达式表示执行时间，默认每天8点
+- 在线Cron表达式生成器: http://cron.qqe2.com/
+
+### 天气预报城市
+- .properties
+```
+city=泸州
+```
+
+### 邮箱
+- .properties
+使用SMTP协议发送，发件邮箱
+```
+spring.mail.host=smtp.163.com
+spring.mail.username=15234076721@163.com
+spring.mail.password=xxxx
+```
+
+收件邮箱
+```
+mailto=15234076721@163.com
+```
+
