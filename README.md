@@ -1,7 +1,12 @@
 # ererydayMail
-基于Spring Boot的每日定时发送邮件。包括三部分，自定义内容，天气，每日一句。
+基于Spring Boot的每日定时发送邮件
 
-## 自定义内容
+## 预览
+包括三部分，自定义内容，天气，每日一句。
+效果如下
+![](https://github.com/yuan0824/img/blob/master/email-1.jpg)![](https://github.com/yuan0824/img/blob/master/email-2.jpg)
+
+### 自定义内容
 FreeMarker模板引擎
 - email.ftl
 ```html
@@ -12,7 +17,7 @@ FreeMarker模板引擎
 </div>
 ```
 
-## 天气
+### 天气
 调用**天行API**获取天气类型，温度，空气质量  
 调用**SOJSON API**获取温馨提醒
 
@@ -47,7 +52,7 @@ FreeMarker模板引擎
     }
 ```
 
-## 每日一句  
+### 每日一句  
 
 每日一句有很多推荐的数据来源
 - 彩虹屁: https://chp.shadiao.app
@@ -58,3 +63,32 @@ FreeMarker模板引擎
 ![](https://github.com/yuan0824/img/blob/master/%E6%B8%A3%E7%94%B7%E8%AF%B4%E8%AF%9D%E7%9A%84%E8%89%BA%E6%9C%AF.png)
 - 一个:http://wufazhuce.com/
 ![](https://github.com/yuan0824/img/blob/master/%E4%B8%80%E4%B8%AA.png)
+
+本项目使用的是最后一个，韩寒监制的「ONE·一个」APP
+> 复杂世界里，一个就够了
+
+JSoup爬虫爬取每日一句话和一张图
+```java
+    static One getOne() throws IOException, ParseException {
+        Date now = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date day = dateFormat.parse("2019-09-01");
+        int days = (int) ((now.getTime() - day.getTime()) / (1000*3600*24));
+        int value = 2562 + days - 6;
+        String url = "http://wufazhuce.com/one/" + value;
+        Document document = Jsoup.connect(url).get();
+
+        Elements elements1 = document.select("meta[name=description]");
+        String content = elements1.get(0).attributes().get("content");
+
+        Elements elements2 = document.select("meta[property=og:image]");
+        String img = elements2.get(0).attributes().get("content");
+
+        One one = new One();
+        one.setContext(content);
+        one.setImg(img);
+        return one;
+    }
+```
+
+配置
