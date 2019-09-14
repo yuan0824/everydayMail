@@ -27,7 +27,7 @@ FreeMarker模板引擎
 
 公用方法
 ```java
-    static String request(String httpUrl, String httpArg) {
+    String request(String httpUrl, String httpArg) {
         BufferedReader reader;
         String result = null;
         StringBuilder sbf = new StringBuilder();
