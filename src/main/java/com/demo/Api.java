@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 
 class Api {
 
-    static String request(String httpUrl, String httpArg) {
+    String request(String httpUrl, String httpArg) {
         BufferedReader reader;
         String result = null;
         StringBuilder sbf = new StringBuilder();
@@ -38,7 +38,7 @@ class Api {
         return result;
     }
 
-    static Weather parse(String json) throws IOException {
+    Weather parse(String json) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(json);
         JsonNode today = root.get("newslist").get(0);
