@@ -27,30 +27,30 @@ FreeMarker模板引擎
 
 公用方法
 ```java
-    String request(String httpUrl, String httpArg) {
-        BufferedReader reader;
-        String result = null;
-        StringBuilder sbf = new StringBuilder();
-        httpUrl = httpUrl + httpArg;
+String request(String httpUrl, String httpArg) {
+    BufferedReader reader;
+    String result = null;
+    StringBuilder sbf = new StringBuilder();
+    httpUrl = httpUrl + httpArg;
 
-        try {
-            URL url = new URL(httpUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestMethod("GET");
-            InputStream is = connection.getInputStream();
-            reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-            String strRead;
-            while ((strRead = reader.readLine()) != null) {
-                sbf.append(strRead);
-                sbf.append("\r\n");
-            }
-            reader.close();
-            result = sbf.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
+    try {
+        URL url = new URL(httpUrl);
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+        InputStream is = connection.getInputStream();
+        reader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
+        String strRead;
+        while ((strRead = reader.readLine()) != null) {
+            sbf.append(strRead);
+            sbf.append("\r\n");
         }
-        return result;
+        reader.close();
+        result = sbf.toString();
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    return result;
+}
 ```
 
 ### 每日一句  
@@ -70,26 +70,26 @@ FreeMarker模板引擎
 
 JSoup爬虫爬取每日一句话和一张图
 ```java
-    static One getOne() throws IOException, ParseException {
-        Date now = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date day = dateFormat.parse("2019-09-01");
-        int days = (int) ((now.getTime() - day.getTime()) / (1000*3600*24));
-        int value = 2562 + days - 6;
-        String url = "http://wufazhuce.com/one/" + value;
-        Document document = Jsoup.connect(url).get();
+static One getOne() throws IOException, ParseException {
+    Date now = new Date();
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Date day = dateFormat.parse("2019-09-01");
+    int days = (int) ((now.getTime() - day.getTime()) / (1000*3600*24));
+    int value = 2562 + days - 6;
+    String url = "http://wufazhuce.com/one/" + value;
+    Document document = Jsoup.connect(url).get();
 
-        Elements elements1 = document.select("meta[name=description]");
-        String content = elements1.get(0).attributes().get("content");
+    Elements elements1 = document.select("meta[name=description]");
+    String content = elements1.get(0).attributes().get("content");
 
-        Elements elements2 = document.select("meta[property=og:image]");
-        String img = elements2.get(0).attributes().get("content");
+    Elements elements2 = document.select("meta[property=og:image]");
+    String img = elements2.get(0).attributes().get("content");
 
-        One one = new One();
-        one.setContext(content);
-        one.setImg(img);
-        return one;
-    }
+    One one = new One();
+    one.setContext(content);
+    one.setImg(img);
+    return one;
+}
 ```
 
 ## 配置
