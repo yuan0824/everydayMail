@@ -21,6 +21,8 @@ public class Call {
 
     @Value("${city}")
     private String city;
+    @Value("${tianxingkey}")
+    private String tianxingkey;
 
     @Autowired
     public Call(Api api) {
@@ -39,7 +41,7 @@ public class Call {
     Weather weather() throws IOException {
         String notice = getNotice();
         String httpUrl = "http://api.tianapi.com/txapi/tianqi/?";
-        String httpArg = "key=af9157730a6fad5f8942a375598f44e8&city=" + city;
+        String httpArg = "key=" + tianxingkey + "&city=" + city;
         String json = api.request(httpUrl, httpArg);
         Weather weather = api.parse(json);
         weather.setNotice(notice);

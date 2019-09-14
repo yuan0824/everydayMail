@@ -20,7 +20,7 @@ class Spider {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date day = dateFormat.parse("2019-09-01");
         int days = (int) ((now.getTime() - day.getTime()) / (1000*3600*24));
-        int value = 2562 + days - 6 - 1;
+        int value = 2562 + days - 6;
         String url = "http://wufazhuce.com/one/" + value;
         Document document = Jsoup.connect(url).get();
 
