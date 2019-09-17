@@ -2,33 +2,23 @@ package com.demo;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
+import org.jsoup.nodes.Node;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * @author yuan
  */
 class Spider {
 
-    static One getOne() throws IOException, ParseException {
-        Date now = new Date();
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date day = dateFormat.parse("2019-09-01");
-        int days = (int) ((now.getTime() - day.getTime()) / (1000*3600*24));
-        int value = 2562 + days - 6;
-        String url = "http://wufazhuce.com/one/" + value;
-        Document document = Jsoup.connect(url).get();
+    static One getOne() throws IOException {
+        String url = "http://wufazhuce.com/";
+        Document doc = Jsoup.connect(url).get();
 
-        Elements elements1 = document.select("meta[name=description]");
-        String content = elements1.get(0).attributes().get("content");
+        Node root = doc.childNode(1).childNode(2).childNode(3).childNode(1).childNode(1).childNode(1).childNode(1).childNode(1).childNode(1);
 
-        Elements elements2 = document.select("meta[property=og:image]");
-        String img = elements2.get(0).attributes().get("content");
+        String content = root.childNode(5).childNode(3).childNode(1).childNode(0).toString();
+        String img = root.childNode(1).childNode(0).attr("src");
 
         One one = new One();
         one.setContext(content);
