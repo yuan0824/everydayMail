@@ -13,7 +13,6 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +40,7 @@ public class SendEmail {
         this.call = call;
     }
 
-    void send() throws IOException, TemplateException, MessagingException, ParseException {
+    void send() throws IOException, TemplateException, MessagingException {
         //FreeMarker 数据模型+模板
         Map<String,Object> root = new HashMap<>();
         Weather weather = call.weather();

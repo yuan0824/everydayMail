@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
-import java.text.ParseException;
 
 
 /**
@@ -25,7 +24,7 @@ public class ScheduledTasks {
     }
 
     @Scheduled(cron = "0 0 8 * * ?")
-    public void reportCurrentTime() throws TemplateException, IOException, MessagingException, ParseException {
+    public void reportCurrentTime() throws TemplateException, IOException, MessagingException {
         log.info("start send");
         sendEmail.send();
         log.info("end send");
