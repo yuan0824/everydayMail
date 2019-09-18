@@ -70,26 +70,20 @@ String request(String httpUrl, String httpArg) {
 
 JSoup爬虫爬取每日一句话和一张图
 ```java
-static One getOne() throws IOException, ParseException {
-    Date now = new Date();
-    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    Date day = dateFormat.parse("2019-09-01");
-    int days = (int) ((now.getTime() - day.getTime()) / (1000*3600*24));
-    int value = 2562 + days - 6;
-    String url = "http://wufazhuce.com/one/" + value;
-    Document document = Jsoup.connect(url).get();
+    static One getOne() throws IOException {
+        String url = "http://wufazhuce.com/";
+        Document doc = Jsoup.connect(url).get();
 
-    Elements elements1 = document.select("meta[name=description]");
-    String content = elements1.get(0).attributes().get("content");
+        Node root = doc.childNode(1).childNode(2).childNode(3).childNode(1).childNode(1).childNode(1).childNode(1).childNode(1).childNode(1);
 
-    Elements elements2 = document.select("meta[property=og:image]");
-    String img = elements2.get(0).attributes().get("content");
+        String content = root.childNode(5).childNode(3).childNode(1).childNode(0).toString();
+        String img = root.childNode(1).childNode(0).attr("src");
 
-    One one = new One();
-    one.setContext(content);
-    one.setImg(img);
-    return one;
-}
+        One one = new One();
+        one.setContext(content);
+        one.setImg(img);
+        return one;
+    }
 ```
 
 ## 配置
