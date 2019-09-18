@@ -70,20 +70,20 @@ String request(String httpUrl, String httpArg) {
 
 JSoup爬虫爬取每日一句话和一张图
 ```java
-    static One getOne() throws IOException {
-        String url = "http://wufazhuce.com/";
-        Document doc = Jsoup.connect(url).get();
+static One getOne() throws IOException {
+    String url = "http://wufazhuce.com/";
+    Document doc = Jsoup.connect(url).get();
 
-        Node root = doc.childNode(1).childNode(2).childNode(3).childNode(1).childNode(1).childNode(1).childNode(1).childNode(1).childNode(1);
+    Node root = doc.childNode(1).childNode(2).childNode(3).childNode(1).childNode(1).childNode(1).childNode(1).childNode(1).childNode(1);
 
-        String content = root.childNode(5).childNode(3).childNode(1).childNode(0).toString();
-        String img = root.childNode(1).childNode(0).attr("src");
+    String content = root.childNode(5).childNode(3).childNode(1).childNode(0).toString();
+    String img = root.childNode(1).childNode(0).attr("src");
 
-        One one = new One();
-        one.setContext(content);
-        one.setImg(img);
-        return one;
-    }
+    One one = new One();
+    one.setContext(content);
+    one.setImg(img);
+    return one;
+}
 ```
 
 ## 配置
@@ -103,7 +103,7 @@ public class ScheduledTasks {
     }
 
     @Scheduled(cron = "0 0 8 * * ?")
-    public void reportCurrentTime() throws TemplateException, IOException, MessagingException, ParseException {
+    public void reportCurrentTime() throws TemplateException, IOException, MessagingException {
         log.info("start send");
         sendEmail.send();
         log.info("end send");
@@ -142,7 +142,7 @@ public class MailTest {
     private SendEmail sendEmail;
 
     @Test
-    public void send() throws MessagingException, IOException, TemplateException, ParseException {
+    public void send() throws MessagingException, IOException, TemplateException {
         sendEmail.send();
     }
 }
