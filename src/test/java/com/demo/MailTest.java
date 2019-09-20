@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.mail.MessagingException;
 import java.io.IOException;
-import java.text.ParseException;
 
 /**
  * @author yuan
@@ -22,7 +21,7 @@ public class MailTest {
     private SendEmail sendEmail;
 
     @Test
-    public void send() throws MessagingException, IOException, TemplateException, ParseException {
+    public void send() throws MessagingException, IOException, TemplateException {
         sendEmail.send();
     }
 }
