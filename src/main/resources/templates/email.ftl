@@ -41,9 +41,12 @@
     <span style="display:block;margin-top:55px;color:#676767;font-size:15px">ONE · 一个</span>
     <span style="display:block;margin-top:25px;font-size:22px; color:#9d9d9d; ">${.now?string["yyyy/MM/dd"]}</span>
     <img src="${one.img}" style="width:100%;margin-top:10px;">
-    <div style="margin:10px auto;width:85%;color:#5f5e5e;" >${one.context}</div>
-</div>
+    <#assign nums=one.contents/>
+    <#list nums as num>
+        <div style="margin:10px auto;width:85%;color:#5f5e5e;" >${num}</div>
+    </#list>
 
+</div>
 
 </body>
 

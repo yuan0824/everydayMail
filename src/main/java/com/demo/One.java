@@ -7,6 +7,6 @@ import lombok.Data;
  */
 @Data
 public class One {
-    private String context;
+    private String[] contents;
     private String img;
 }

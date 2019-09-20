@@ -22,12 +22,13 @@ class Spider {
 
         Elements elements1 = doc.select("meta[name=description]");
         String content = elements1.get(0).attributes().get("content");
+        String[] contents = content.split("\n");
 
         Elements elements2 = doc.select("meta[property=og:image]");
         String img = elements2.get(0).attributes().get("content");
 
         One one = new One();
-        one.setContext(content);
+        one.setContents(contents);
         one.setImg(img);
         return one;
     }
