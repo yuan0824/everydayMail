@@ -1,5 +1,6 @@
 package com.demo;
 
+import com.demo.pojo.City;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.databind.type.TypeFactory;

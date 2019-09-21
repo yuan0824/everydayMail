@@ -1,5 +1,7 @@
 package com.demo;
 
+import com.demo.pojo.One;
+import com.demo.pojo.Weather;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -25,6 +27,7 @@ public class SendEmail {
     private final JavaMailSender mailSender;
     private final Configuration cfg;
     private final Call call;
+    private final Weather weather;
 
     @Value("${day}")
     private Date day;
@@ -34,13 +37,11 @@ public class SendEmail {
     private String mailto;
 
     @Autowired
-    private Weather weather;
-
-    @Autowired
-    public SendEmail(JavaMailSender mailSender, Configuration cfg, Call call) {
+    public SendEmail(JavaMailSender mailSender, Configuration cfg, Call call, Weather weather) {
         this.mailSender = mailSender;
         this.cfg = cfg;
         this.call = call;
+        this.weather = weather;
     }
 
     void send() throws IOException, TemplateException, MessagingException {
