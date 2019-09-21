@@ -15,4 +15,9 @@ public class Config {
     public Api api(){
         return new Api();
     }
+
+    @Bean
+    public Weather weather(){
+        return new Weather();
+    }
 }

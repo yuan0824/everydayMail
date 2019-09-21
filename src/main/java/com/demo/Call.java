@@ -18,6 +18,7 @@ import java.io.IOException;
 @PropertySource(value="classpath:application.properties",encoding = "utf-8")
 public class Call {
     private final Api api;
+    private final Weather weather;
 
     @Value("${city}")
     private String city;
@@ -25,28 +26,31 @@ public class Call {
     private String tianxingkey;
 
     @Autowired
-    public Call(Api api) {
+    public Call(Api api, Weather weather) {
         this.api = api;
+        this.weather = weather;
     }
 
-    private String getNotice() throws IOException {
+    private void getNotice() throws IOException {
         String httpUrl = "http://t.weather.sojson.com/api/weather/city/";
         String httpArg = JsonParse.parse(city);
         String json = api.request(httpUrl, httpArg);
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode root = mapper.readTree(json);
-        return root.get("data").get("forecast").get(0).get("notice").asText();
+        JsonNode root = mapper.readTree(json).get("data").get("forecast").get(0);
+        String notice = root.get("notice").asText();
+        String low = root.get("low").asText().substring(3);
+        String high = root.get("high").asText().substring(3);
+        weather.setNotice(notice);
+        weather.setTemperature(low + "/" + high);
     }
 
-    Weather weather() throws IOException {
-        String notice = getNotice();
+    void weather() throws IOException {
+        getNotice();
         String httpUrl = "http://api.tianapi.com/txapi/tianqi/?";
         String httpArg = "key=" + tianxingkey + "&city=" + city;
         String json = api.request(httpUrl, httpArg);
-        Weather weather = api.parse(json);
-        weather.setNotice(notice);
+        api.parse(json);
         weather.setCity(city);
-        return weather;
     }
 
 }

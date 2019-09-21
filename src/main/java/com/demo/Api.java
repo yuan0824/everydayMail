@@ -2,6 +2,7 @@ package com.demo;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,6 +13,8 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 class Api {
+    @Autowired
+    private Weather weather;
 
     String request(String httpUrl, String httpArg) {
         BufferedReader reader;
@@ -38,24 +41,18 @@ class Api {
         return result;
     }
 
-    Weather parse(String json) throws IOException {
+    void parse(String json) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(json);
         JsonNode today = root.get("newslist").get(0);
         String type = today.get("weather").asText();
-        String low = today.get("lowest").asText();
-        String high = today.get("highest").asText();
         int air = today.get("air").asInt();
         String air_level = today.get("air_level").asText();
         String weatherimg = today.get("weatherimg").asText();
 
-        Weather weather = new Weather();
         weather.setType(type);
-        weather.setTemperature(low + "/" + high);
         weather.setAir(air);
         weather.setAir_level(air_level);
-
         weather.setWeatherimg("https://yuangaopeng.com/img/weather/" + weatherimg);
-        return weather;
     }
 }

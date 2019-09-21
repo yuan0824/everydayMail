@@ -34,6 +34,9 @@ public class SendEmail {
     private String mailto;
 
     @Autowired
+    private Weather weather;
+
+    @Autowired
     public SendEmail(JavaMailSender mailSender, Configuration cfg, Call call) {
         this.mailSender = mailSender;
         this.cfg = cfg;
@@ -43,7 +46,7 @@ public class SendEmail {
     void send() throws IOException, TemplateException, MessagingException {
         //FreeMarker 数据模型+模板
         Map<String,Object> root = new HashMap<>();
-        Weather weather = call.weather();
+        call.weather();
         One one = Spider.getOne();
         root.put("weather",weather);
         root.put("one",one);
