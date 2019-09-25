@@ -24,10 +24,16 @@ import java.util.Map;
  */
 @Service
 public class SendEmail {
-    private final JavaMailSender mailSender;
-    private final Configuration cfg;
-    private final Call call;
-    private final Weather weather;
+    @Autowired
+    private JavaMailSender mailSender;
+    @Autowired
+    private Configuration cfg;
+    @Autowired
+    private Call call;
+    @Autowired
+    private Weather weather;
+    @Autowired
+    private One one;
 
     @Value("${day}")
     private Date day;
@@ -36,19 +42,10 @@ public class SendEmail {
     @Value("${mailto}")
     private String mailto;
 
-    @Autowired
-    public SendEmail(JavaMailSender mailSender, Configuration cfg, Call call, Weather weather) {
-        this.mailSender = mailSender;
-        this.cfg = cfg;
-        this.call = call;
-        this.weather = weather;
-    }
-
     void send() throws IOException, TemplateException, MessagingException {
         //FreeMarker 数据模型+模板
         Map<String,Object> root = new HashMap<>();
-        call.weather();
-        One one = Spider.getOne();
+        call.setWeather();
         root.put("weather",weather);
         root.put("one",one);
         Date now = new Date();

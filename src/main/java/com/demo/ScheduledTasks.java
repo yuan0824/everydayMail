@@ -16,12 +16,8 @@ import java.io.IOException;
 @Slf4j
 @Component
 public class ScheduledTasks {
-    private final SendEmail sendEmail;
-
     @Autowired
-    public ScheduledTasks(SendEmail sendEmail) {
-        this.sendEmail = sendEmail;
-    }
+    private SendEmail sendEmail;
 
     @Scheduled(cron = "0 0 8 * * ?")
     public void reportCurrentTime() throws TemplateException, IOException, MessagingException {

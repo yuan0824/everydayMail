@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 class Spider {
 
-    static One getOne() throws IOException {
+    One getOne() throws IOException {
         String url = "http://wufazhuce.com/";
         Document doc = Jsoup.connect(url).get();
 

@@ -18,21 +18,17 @@ import java.io.IOException;
 @Component
 @PropertySource(value="classpath:application.properties",encoding = "utf-8")
 public class Call {
-    private final Api api;
-    private final Weather weather;
+    @Autowired
+    private Api api;
+    @Autowired
+    private Weather weather;
 
     @Value("${city}")
     private String city;
     @Value("${tianxingkey}")
     private String tianxingkey;
 
-    @Autowired
-    public Call(Api api, Weather weather) {
-        this.api = api;
-        this.weather = weather;
-    }
-
-    private void getNotice() throws IOException {
+    void setWeather1() throws IOException {
         String httpUrl = "http://t.weather.sojson.com/api/weather/city/";
         String httpArg = JsonParse.parse(city);
         String json = api.request(httpUrl, httpArg);
@@ -45,8 +41,7 @@ public class Call {
         weather.setTemperature(low + "/" + high);
     }
 
-    void weather() throws IOException {
-        getNotice();
+    void setWeather2() throws IOException {
         String httpUrl = "http://api.tianapi.com/txapi/tianqi/?";
         String httpArg = "key=" + tianxingkey + "&city=" + city;
         String json = api.request(httpUrl, httpArg);
@@ -54,4 +49,8 @@ public class Call {
         weather.setCity(city);
     }
 
+    void setWeather() throws IOException {
+        setWeather1();
+        setWeather2();
+    }
 }

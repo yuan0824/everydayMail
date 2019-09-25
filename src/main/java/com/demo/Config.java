@@ -1,9 +1,12 @@
 package com.demo;
 
+import com.demo.pojo.One;
 import com.demo.pojo.Weather;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+
+import java.io.IOException;
 
 /**
  * @author yuan
@@ -21,4 +24,11 @@ public class Config {
     public Weather weather(){
         return new Weather();
     }
+
+    @Bean
+    public One one() throws IOException {
+        Spider spider = new Spider();
+        return spider.getOne();
+    }
+
 }
