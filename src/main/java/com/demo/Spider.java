@@ -17,7 +17,8 @@ class Spider {
         String url = "http://wufazhuce.com/";
         Document doc = Jsoup.connect(url).get();
 
-        Node root = doc.childNode(1).childNode(2).childNode(3).childNode(1).childNode(1).childNode(1).childNode(1).childNode(1).childNode(1).childNode(1);
+        Node root = doc.childNode(1).childNode(2).childNode(3).childNode(1)
+                .childNode(1).childNode(1).childNode(1).childNode(1).childNode(1).childNode(1);
         String newUrl = root.attr("href");
         doc = Jsoup.connect(newUrl).get();
 
