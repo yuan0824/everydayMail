@@ -26,9 +26,8 @@ public class Config {
     }
 
     @Bean
-    public One one() throws IOException {
-        Spider spider = new Spider();
-        return spider.getOne();
+    public Spider Spider() {
+        return new Spider();
     }
 
 }

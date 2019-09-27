@@ -33,7 +33,7 @@ public class SendEmail {
     @Autowired
     private Weather weather;
     @Autowired
-    private One one;
+    private Spider spider;
 
     @Value("${day}")
     private Date day;
@@ -47,6 +47,7 @@ public class SendEmail {
         Map<String,Object> root = new HashMap<>();
         call.setWeather();
         root.put("weather",weather);
+        One one = spider.getOne();
         root.put("one",one);
         Date now = new Date();
         int days = (int) ((now.getTime() - day.getTime()) / (1000*3600*24));
