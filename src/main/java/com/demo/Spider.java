@@ -3,7 +3,6 @@ package com.demo;
 import com.demo.pojo.One;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Node;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
@@ -17,9 +16,8 @@ class Spider {
         String url = "http://wufazhuce.com/";
         Document doc = Jsoup.connect(url).get();
 
-        Node root = doc.childNode(1).childNode(2).childNode(3).childNode(1)
-                .childNode(1).childNode(1).childNode(1).childNode(1).childNode(1).childNode(1);
-        String newUrl = root.attr("href");
+        String newUrl = doc.getElementById("carousel-one")
+                .childNode(1).childNode(1).childNode(1).attr("href");
         doc = Jsoup.connect(newUrl).get();
 
         Elements elements1 = doc.select("meta[name=description]");
