@@ -16,8 +16,7 @@ class Spider {
         String url = "http://wufazhuce.com/";
         Document doc = Jsoup.connect(url).get();
 
-        String newUrl = doc.getElementById("carousel-one")
-                .childNode(1).childNode(1).childNode(1).attr("href");
+        String newUrl = doc.getElementsByClass("item active").get(0).child(0).attr("href");
         doc = Jsoup.connect(newUrl).get();
 
         Elements elements1 = doc.select("meta[name=description]");
