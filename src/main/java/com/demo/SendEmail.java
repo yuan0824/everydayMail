@@ -42,7 +42,7 @@ public class SendEmail {
     @Value("${mailto}")
     private String mailto;
 
-    void send() throws IOException, TemplateException, MessagingException {
+    public void send() throws IOException, TemplateException, MessagingException {
         //FreeMarker 数据模型+模板
         Map<String,Object> root = new HashMap<>();
         call.setWeather();
