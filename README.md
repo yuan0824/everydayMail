@@ -1,4 +1,4 @@
-# ererydayMail
+# everydayMail
 基于Spring Boot的每日定时发送邮件
 
 ## 预览
