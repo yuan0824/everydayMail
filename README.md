@@ -148,6 +148,4 @@ public class MailTest {
 }
 ```
 
-## 欢迎
-欢迎阅读和review代码
 
