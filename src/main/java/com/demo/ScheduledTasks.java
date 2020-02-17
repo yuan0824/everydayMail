@@ -19,7 +19,7 @@ public class ScheduledTasks {
     @Autowired
     private SendEmail sendEmail;
 
-    @Scheduled(cron = "0 0 8 * * ?")
+    @Scheduled(cron = "${cron}")
     public void reportCurrentTime() throws TemplateException, IOException, MessagingException {
         log.info("start send");
         sendEmail.send();
