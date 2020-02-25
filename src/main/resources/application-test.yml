@@ -17,6 +17,6 @@ mailto: 610951793@qq.com
 spring:
   mail:
     host: smtp.163.com
-    password: Gaopeng0824
+    password: xxxxxxxx
     username: 15234076721@163.com
 
