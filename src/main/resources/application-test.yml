@@ -1,0 +1,22 @@
+# 天气来源
+tianxingkey: xxxxxxxxxxxx
+
+# 天气预报城市
+city: 泸州
+
+# 关键日期
+day: 2017/6/12
+
+# 发送时间
+cron: 0 * * * * ?
+
+# 收件邮箱配置
+mailto: 610951793@qq.com
+
+# 发件邮箱配置
+spring:
+  mail:
+    host: smtp.163.com
+    password: Gaopeng0824
+    username: 15234076721@163.com
+

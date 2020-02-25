@@ -16,7 +16,7 @@ import java.io.IOException;
  * @author yuan
  */
 @Component
-@PropertySource(value="classpath:application.properties",encoding = "utf-8")
+@PropertySource(value="classpath:application.yml",encoding = "utf-8")
 public class Call {
     @Autowired
     private Api api;

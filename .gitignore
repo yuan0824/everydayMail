@@ -1,4 +1,4 @@
 .idea/
 target/
-application-prod.properties
-application-dev.properties
+application-prod.yml
+application-dev.yml
