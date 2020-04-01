@@ -1,12 +1,8 @@
 package com.demo;
 
-import com.demo.pojo.Weather;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.BufferedReader;
-import java.io.IOException;
+
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -14,8 +10,6 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 class Api {
-    @Autowired
-    private Weather weather;
 
     String request(String httpUrl, String httpArg) {
         BufferedReader reader;
@@ -42,18 +36,4 @@ class Api {
         return result;
     }
 
-    void parse(String json) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode root = mapper.readTree(json);
-        JsonNode today = root.get("newslist").get(0);
-        String type = today.get("weather").asText();
-        int air = today.get("air").asInt();
-        String air_level = today.get("air_level").asText();
-        String weatherimg = today.get("weatherimg").asText();
-
-        weather.setType(type);
-        weather.setAir(air);
-        weather.setAir_level(air_level);
-        weather.setWeatherimg("https://yuangaopeng.com/img/weather/" + weatherimg);
-    }
 }

@@ -37,15 +37,23 @@ public class Call {
         String notice = root.get("notice").asText();
         String low = root.get("low").asText().substring(3);
         String high = root.get("high").asText().substring(3);
+        int aqi = root.get("aqi").asInt();
         weather.setNotice(notice);
         weather.setTemperature(low + "/" + high);
+        weather.setAqi(aqi);
     }
 
     void setWeather2() throws IOException {
         String httpUrl = "http://api.tianapi.com/txapi/tianqi/?";
         String httpArg = "key=" + tianxingkey + "&city=" + city;
         String json = api.request(httpUrl, httpArg);
-        api.parse(json);
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = mapper.readTree(json);
+        JsonNode today = root.get("newslist").get(0);
+        String type = today.get("weather").asText();
+        String weatherImg = today.get("weatherimg").asText();
+        weather.setType(type);
+        weather.setWeatherImg("https://yuangaopeng.com/img/weather/" + weatherImg);
         weather.setCity(city);
     }
 

@@ -18,20 +18,24 @@
     <div style="display: flex;margin-top:5px;height: 30px;line-height: 30px;justify-content: space-around;align-items: center;">
         <span style="width:15%; text-align:center;">${weather.city!}</span>
         <div style="width:35%; text-align:center;">
-            <img style="height:26px;vertical-align:middle;"  src="${weather.weatherimg!}">
+            <img style="height:26px;vertical-align:middle;"  src="${weather.weatherImg!}">
             <span style="display:inline-block">${weather.type!}</span>
         </div>
         <span style="width:25%; text-align:center;">${weather.temperature!}</span>
 
         <div style="width:25%; ">
-        <#if weather.air <= 50>
-            <span style="display:inline-block;padding:0 8px;line-height:25px;color:#8fc31f; border-radius:15px; text-align:center;">${weather.air!}${weather.air_level!}</span>
-        <#elseif (weather.air > 50 && weather.air <= 100)>
-            <span style="display:inline-block;padding:0 8px;line-height:25px;color:#d7af0e; border-radius:15px; text-align:center;">${weather.air!}${weather.air_level!}</span>
-        <#elseif (weather.air > 100 && weather.air <= 300)>
-            <span style="display:inline-block;padding:0 8px;line-height:25px;color:#f39800; border-radius:15px; text-align:center;">${weather.air!}${weather.air_level!}</span>
+        <#if weather.quality == "优">
+            <span style="display:inline-block;padding:0 8px;line-height:25px;color:#008000; border-radius:15px; text-align:center;">${weather.aqi!}${weather.quality!}</span>
+        <#elseif weather.quality == "良">
+            <span style="display:inline-block;padding:0 8px;line-height:25px;color:#ffff00; border-radius:15px; text-align:center;">${weather.aqi!}${weather.quality!}</span>
+        <#elseif weather.quality == "轻度污染">
+            <span style="display:inline-block;padding:0 8px;line-height:25px;color:#ffa500; border-radius:15px; text-align:center;">${weather.aqi!}${weather.quality!}</span>
+        <#elseif weather.quality == "中度污染">
+            <span style="display:inline-block;padding:0 8px;line-height:25px;color:#ff0000; border-radius:15px; text-align:center;">${weather.aqi!}${weather.quality!}</span>
+        <#elseif weather.quality == "重度污染">
+            <span style="display:inline-block;padding:0 8px;line-height:25px;color:#800080; border-radius:15px; text-align:center;">${weather.aqi!}${weather.quality!}</span>
         <#else>
-            <span style="display:inline-block;padding:0 8px;line-height:25px;color:#e2361a; border-radius:15px; text-align:center;">${weather.air!}${weather.air_level!}</span>
+            <span style="display:inline-block;padding:0 8px;line-height:25px;color:#a52a2a; border-radius:15px; text-align:center;">${weather.aqi!}${weather.quality!}</span>
         </#if>
         </div>
     </div>
